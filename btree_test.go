@@ -1,4 +1,4 @@
-package db
+package main
 
 import (
 	"github.com/stretchr/testify/require"
@@ -56,25 +56,6 @@ func createTestMockTree() *Tree {
 	root.addChildNode(child2)
 
 	return newTreeWithRoot(root, minItems)
-}
-
-func createTestMockTreeWithout7() *Tree {
-	root := NewEmptyNode()
-	root.addItems("2", "5")
-
-	child0 := NewEmptyNode()
-	child0.addItems("0", "1")
-	root.addChildNode(child0)
-
-	child1 := NewEmptyNode()
-	child1.addItems("3", "4")
-	root.addChildNode(child1)
-
-	child2 := NewEmptyNode()
-	child2.addItems("6", "8", "9")
-	root.addChildNode(child2)
-
-	return &Tree{root: root}
 }
 
 func (n *Node) addItems(keys ...string) *Node {

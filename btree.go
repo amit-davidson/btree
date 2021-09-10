@@ -1,4 +1,6 @@
-package db
+package main
+
+var DefaultMinItems = 128
 
 type Item struct {
 	key   string
@@ -11,17 +13,17 @@ type Node struct {
 	childNodes []*Node
 }
 
+type Tree struct {
+	root *Node
+	minItems int
+	maxItems int
+}
+
 func newItem(key string, value interface{}) *Item {
 	return &Item{
 		key:   key,
 		value: value,
 	}
-}
-
-type Tree struct {
-	root *Node
-	minItems int
-	maxItems int
 }
 
 func newTreeWithRoot(root *Node, minItems int) *Tree {
