@@ -40,6 +40,10 @@ func NewTree(minItems int) *Tree {
 	return newTreeWithRoot(NewEmptyNode(), minItems)
 }
 
+// Put adds a key to the tree. It finds the correct node and the insertion index and adds the item. When performing the
+// search, the ancestors are returned as well. This way we can iterate over them to check which nodes were modified and
+// rebalance by splitting them accordingly. If the root has too many items, then a new root of a new layer is
+// created and the created nodes from the split are added as children.
 func (b *Tree) Put(key string, value interface{}) {
 	// Find the path to the node where the insertion should happen
 	i := newItem(key, value)
@@ -66,6 +70,11 @@ func (b *Tree) Put(key string, value interface{}) {
 	}
 }
 
+// Remove removes a key from the tree. It finds the correct node and the index to remove the item from and removes it.
+// When performing the search, the ancestors are returned as well. This way we can iterate over them to check which
+// nodes were modified and rebalance by rotating or merging the unbalanced nodes. Rotation is done first. If the
+// siblings don't have enough items, then merging occurs. If the root is without items after a split, then the root is
+// removed and the tree is one level shorter.
 func (b *Tree) Remove(key string) {
 	// Find the path to the node where the deletion should happen
 	removeItemIndex, nodeToRemoveFrom, ancestorsIndexes := b.findKey(key, true)
@@ -92,6 +101,7 @@ func (b *Tree) Remove(key string) {
 	}
 }
 
+// Find Returns an item according based on the given key by performing a binary search.
 func (b *Tree) Find(key string) *Item {
 	index, containingNode, _ := b.findKey(key, true)
 	if index == -1 {
