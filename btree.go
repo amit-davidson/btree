@@ -235,10 +235,10 @@ func (n *Node) addChild(node *Node, insertionIndex int) {
 // is depicted in the graph below. If it's not a leaf node, then the children has to be moved as well as shown.
 // This may leave the parent unbalanced by having too many items so rebalancing has to be checked for all the ancestors.
 // 	           n                                        n
-//             3                                       3,6
+//                 3                                       3,6
 //	      /        \           ------>       /          |          \
 //	   a           modifiedNode            a       modifiedNode     c
-//   1,2             4,5,6,7,8            1,2          4,5         7,8
+//   1,2                 4,5,6,7,8            1,2          4,5         7,8
 func (n *Node) split(modifiedNode *Node, insertionIndex int) {
 	i := 0
 	nodeSize := n.bucket.minItems
@@ -329,10 +329,10 @@ func (n *Node) removeItemFromInternal(index int) []int {
 
 func rotateRight(aNode, pNode, bNode *Node, bNodeIndex int) {
 	// 	           p                                    p
-	//             4                                    3
+	//                 4                                    3
 	//	      /        \           ------>         /          \
 	//	   a           b (unbalanced)            a        b (unbalanced)
-	//   1,2,3             5                   1,2            4,5
+	//      1,2,3             5                     1,2            4,5
 
 	// Get last item and remove it
 	aNodeItem := aNode.items[len(aNode.items)-1]
@@ -359,10 +359,10 @@ func rotateRight(aNode, pNode, bNode *Node, bNodeIndex int) {
 
 func rotateLeft(aNode, pNode, bNode *Node, bNodeIndex int) {
 	// 	           p                                     p
-	//             2                                     3
+	//                 2                                     3
 	//	      /        \           ------>         /          \
-	//  a(unbalanced)   b                 a(unbalanced)        b
-	//   1             3,4,5                   1,2            4,5
+	//  a(unbalanced)       b                 a(unbalanced)        b
+	//   1                3,4,5                   1,2             4,5
 
 	// Get first item and remove it
 	bNodeItem := bNode.items[0]
@@ -391,10 +391,10 @@ func merge(pNode *Node, unbalancedNodeIndex int) {
 	unbalancedNode := pNode.childNodes[unbalancedNodeIndex]
 	if unbalancedNodeIndex == 0 {
 		// 	               p                                     p
-		//                2,5                                     5
+		//                    2,5                                     5
 		//	      /        |       \       ------>         /          \
-		//  a(unbalanced)   b       c                     a            c
-		//   1             3,4     6,7                 1,2,3,4         6,7
+		//  a(unbalanced)   b           c                     a            c
+		//   1             3,4          6,7                 1,2,3,4        6,7
 		aNode := unbalancedNode
 		bNode := pNode.childNodes[unbalancedNodeIndex+1]
 
@@ -411,10 +411,10 @@ func merge(pNode *Node, unbalancedNodeIndex int) {
 		}
 	} else {
 		// 	               p                                     p
-		//                3,5                                     5
+		//                    3,5                                    5
 		//	      /        |       \       ------>         /          \
-		//      a   b(unbalanced)   c                     a            c
-		//   1,2             4     6,7                 1,2,3,4         6,7
+		//           a   b(unbalanced)   c                    a            c
+		//          1,2         4        6,7                 1,2,3,4         6,7
 		bNode := unbalancedNode
 		aNode := pNode.childNodes[unbalancedNodeIndex-1]
 
