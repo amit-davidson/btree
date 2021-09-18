@@ -10,6 +10,7 @@ btree is a Go implementation of a B-Tree. This project is intended for learning 
 (<500LOC) and highly documented. It means it can be a good starting point for people interested in data structures or 
 how databases work.
 
+You can checkout [my blog post](https://medium.com/@amitdavidson234/all-about-b-trees-and-databases-8c0697856189) about the implementation and deep cover about B trees and databases
 
 ## Installing
 
