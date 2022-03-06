@@ -1,14 +1,8 @@
-module LibraDB
+module github.com/amit-davidson/btree
 
 go 1.17
 
-require (
-	github.com/google/btree v1.0.1
-	github.com/pkg/profile v1.6.0
-	github.com/stretchr/testify v1.7.0
-	github.com/tidwall/btree v0.6.1
-	github.com/tidwall/lotsa v1.0.2
-)
+require github.com/stretchr/testify v1.7.0
 
 require (
 	github.com/davecgh/go-spew v1.1.0 // indirect
